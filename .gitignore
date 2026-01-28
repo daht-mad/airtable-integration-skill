@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+
+# Sisyphus internal state (plans are fine to commit)
+.sisyphus/boulder.json
+.sisyphus/notepads/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# MCP config (contains API keys)
+.mcp.json
+
+# Airtable data (may contain sensitive info)
+.airtable/*/snapshots/
