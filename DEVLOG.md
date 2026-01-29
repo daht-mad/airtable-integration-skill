@@ -527,41 +527,7 @@ Task 6: 크로스 레퍼런스 검증 및 최종 정리
 
 ---
 
-### 9. gpters-ai-toolkit 등록 시도 및 MCP 인증 문제
-
-```
-[사용자]
-마지막으로 해당 스킬을 gpters-toolkit에도 배포해줘
-```
-
-**시도 1: gpters-ai-toolkit MCP 사용**
-- `mcp__gpters-ai-toolkit__deploy_skill` 도구 호출
-- 결과: **401 Unauthorized 에러**
-
-```
-[에러 메시지]
-HTTP MCP 서버에 인증 헤더가 설정되지 않음
-→ API 키 또는 Bearer 토큰 필요
-```
-
-**시도 2: Playwright로 폼 채우기**
-- gpters-toolkit 웹사이트에 직접 접근 시도
-- 결과: **로그인 필요** (인증 문제 동일)
-
-**근본 원인:**
-- gpters-ai-toolkit MCP 서버 설정에 인증 정보 누락
-- HTTP MCP는 요청 시 인증 헤더를 자동으로 포함하지 않음
-
-**제시된 해결책:**
-1. OAuth 인증 플로우 구현
-2. `.mcp.json`에 Bearer 토큰 직접 추가
-3. 환경변수로 API 키 전달
-
-> 이 문제는 이후 별도 세션에서 해결됨 (섹션 11 참조)
-
----
-
-### 10. airtable-template 폴더 삭제
+### 9. airtable-template 폴더 삭제
 
 ```
 [사용자]
@@ -586,7 +552,7 @@ airtable-integration 스킬의 references/ 폴더로 흡수되었기 때문에
 
 ---
 
-### 11. Git 커밋 및 푸시
+### 10. Git 커밋 및 푸시
 
 ```
 이거 깃커밋푸시해줘
@@ -599,42 +565,7 @@ airtable-integration 스킬의 references/ 폴더로 흡수되었기 때문에
 
 ---
 
-### 12. gpters-toolkit에 스킬 배포 (gpters-partners에서 작업)
-
-```
-https://github.com/daht-mad/airtable-integration-skill 여기에 배포한 스킬을 gpters-toolkit에도 배포해줘
-```
-
-**Claude Code 작업:**
-- GitHub API로 스킬 저장소 파일 내용 가져오기
-  - `gh api repos/daht-mad/airtable-integration-skill/contents/SKILL.md`
-  - `assets/` 폴더: airtable.ts, airtable.types.ts, mcp-config.json
-  - `references/` 폴더: usage-guide.md, claude-context.md, schema-template.md
-- `mcp__gpters-ai-toolkit__deploy_skill` 도구로 gpters-toolkit에 배포
-  - name: "에어테이블 연동"
-  - id: `airtable-integration`
-  - tags: airtable, mcp, sdk, database, integration
-  - teamTag: data
-
----
-
-### 13. gpters-toolkit 기존 스킬 정리
-
-```
-Airtable 연동 이라는 걸 gpters-toolkit에서 제거해줘. 새로운 걸 올릴거야.
-```
-
-**Claude Code 작업:**
-- `mcp__gpters-ai-toolkit__semantic_search`로 기존 스킬 검색
-- 발견된 스킬 2개:
-  - `airtable-connect` (Airtable 연동) - Next.js 프로젝트용
-  - `airtable-integration` (에어테이블 연동) - MCP + SDK 래퍼
-- `mcp__gpters-ai-toolkit__undeploy_skill`로 `airtable-integration` 삭제
-- 새 버전으로 재배포 준비
-
----
-
-### 14. gpters-partners 프로젝트에 스킬 설치
+### 11. gpters-partners 프로젝트에 스킬 설치
 
 ```
 gpters-partners 프로젝트에 이 스킬 설치해줘
@@ -919,3 +850,80 @@ schema.md 업데이트
    - Pagination 핸들링
    - Batch 제한 (10개) 안내
    - 7개 안티패턴 방지
+
+---
+
+## 부록: gpters-toolkit 배포 기록
+
+> 이 섹션은 gpters-ai-toolkit (팀 내부 스킬 공유 플랫폼)에 스킬을 배포한 과정을 기록합니다.
+
+### 1. 첫 번째 시도 및 MCP 인증 문제 (Day 1)
+
+> **세션**: `ses_3fd789b63ffe8wXZMeJ318QhR3` (2026-01-28)
+
+```
+[사용자]
+마지막으로 해당 스킬을 gpters-toolkit에도 배포해줘
+```
+
+**시도 1: gpters-ai-toolkit MCP 사용**
+- `mcp__gpters-ai-toolkit__deploy_skill` 도구 호출
+- 결과: **401 Unauthorized 에러**
+
+```
+[에러 메시지]
+HTTP MCP 서버에 인증 헤더가 설정되지 않음
+→ API 키 또는 Bearer 토큰 필요
+```
+
+**시도 2: Playwright로 폼 채우기**
+- gpters-toolkit 웹사이트에 직접 접근 시도
+- 결과: **로그인 필요** (인증 문제 동일)
+
+**근본 원인:**
+- gpters-ai-toolkit MCP 서버 설정에 인증 정보 누락
+- HTTP MCP는 요청 시 인증 헤더를 자동으로 포함하지 않음
+
+**제시된 해결책:**
+1. OAuth 인증 플로우 구현
+2. `.mcp.json`에 Bearer 토큰 직접 추가
+3. 환경변수로 API 키 전달
+
+---
+
+### 2. 배포 성공 (gpters-partners에서 작업)
+
+> 인증 문제 해결 후 별도 세션에서 진행
+
+```
+[사용자]
+https://github.com/daht-mad/airtable-integration-skill 여기에 배포한 스킬을 gpters-toolkit에도 배포해줘
+```
+
+**Claude Code 작업:**
+- GitHub API로 스킬 저장소 파일 내용 가져오기
+  - `gh api repos/daht-mad/airtable-integration-skill/contents/SKILL.md`
+  - `assets/` 폴더: airtable.ts, airtable.types.ts, mcp-config.json
+  - `references/` 폴더: usage-guide.md, claude-context.md, schema-template.md
+- `mcp__gpters-ai-toolkit__deploy_skill` 도구로 gpters-toolkit에 배포
+  - name: "에어테이블 연동"
+  - id: `airtable-integration`
+  - tags: airtable, mcp, sdk, database, integration
+  - teamTag: data
+
+---
+
+### 3. 기존 스킬 정리
+
+```
+[사용자]
+Airtable 연동 이라는 걸 gpters-toolkit에서 제거해줘. 새로운 걸 올릴거야.
+```
+
+**Claude Code 작업:**
+- `mcp__gpters-ai-toolkit__semantic_search`로 기존 스킬 검색
+- 발견된 스킬 2개:
+  - `airtable-connect` (Airtable 연동) - Next.js 프로젝트용
+  - `airtable-integration` (에어테이블 연동) - MCP + SDK 래퍼
+- `mcp__gpters-ai-toolkit__undeploy_skill`로 `airtable-integration` 삭제
+- 새 버전으로 재배포 준비
