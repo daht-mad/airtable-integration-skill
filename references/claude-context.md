@@ -86,11 +86,12 @@ const filtered = records.filter(r =>
 작업 전 **반드시** 스키마 파일을 확인하세요:
 
 ```bash
-# 스키마 파일 존재 여부 확인
-ls .airtable/{appId}/schema.md
+# 스키마 파일 존재 여부 확인 (한글 베이스명 사용)
+ls .airtable/{baseName}/schema.md
+# 예: .airtable/파트너스/schema.md
 
 # 있으면 읽기
-Read .airtable/{appId}/schema.md
+Read .airtable/{baseName}/schema.md
 
 # 없으면 생성 요청
 "스키마 생성해줘"
@@ -105,8 +106,8 @@ Read .airtable/{appId}/schema.md
 
 - `lib/airtable.ts` - Airtable 클라이언트 및 TABLES 상수
 - `lib/airtable.types.ts` - 타입 정의
-- `.airtable/{appId}/schema.md` - 테이블 스키마 캐시 (**작업 전 필독**)
-- `.airtable/{appId}/snapshots/` - 정적 데이터 스냅샷 (있는 경우)
+- `.airtable/{baseName}/schema.md` - 테이블 스키마 캐시 (**작업 전 필독**)
+- `.airtable/{baseName}/snapshots/` - 정적 데이터 스냅샷 (있는 경우)
 
 ### 참조 규칙 문서
 

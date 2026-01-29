@@ -31,8 +31,8 @@
 | **Step 1** | MCP 서버 설정 | `.mcp.json` |
 | **Step 2** | SDK 래퍼 설치 | `lib/airtable.ts`, `lib/airtable.types.ts` |
 | **Step 3** | 환경변수 가이드 | `.env.local` 설정 안내 |
-| **Step 4** | 스키마 캐싱 | `.airtable/{appId}/schema.md` |
-| **Step 5** | 스냅샷 관리 | `.airtable/{appId}/snapshots/*.json` |
+| **Step 4** | 스키마 캐싱 | `.airtable/{baseName}/schema.md` |
+| **Step 5** | 스냅샷 관리 | `.airtable/{baseName}/snapshots/*.json` |
 
 ## 주요 기능
 
@@ -103,7 +103,7 @@ Airtable 테이블 구조를 로컬에 저장하여:
 │   └── airtable.types.ts        # 타입 정의 (Step 2)
 ├── .env.local                   # 환경변수 (Step 3)
 └── .airtable/
-    └── {appId}/
+    └── {baseName}/              # 한글 베이스명 (예: 파트너스)
         ├── schema.md            # 스키마 캐시 (Step 4)
         └── snapshots/           # 데이터 스냅샷 (Step 5)
             └── *.json

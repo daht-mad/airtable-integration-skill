@@ -112,7 +112,8 @@ describe_table(baseId, tableId, { detailLevel: 'full' })
 
 **1. Check for schema file**:
 ```bash
-ls .airtable/{appId}/schema.md
+ls .airtable/{baseName}/schema.md
+# 예: .airtable/파트너스/schema.md
 ```
 
 **2. If missing, request generation**:
@@ -125,7 +126,7 @@ Ask: "Can you generate the Airtable schema for this base?"
 
 **3. Always read schema before operations**:
 ```bash
-Read .airtable/{appId}/schema.md
+Read .airtable/{baseName}/schema.md
 ```
 
 ### Schema Contents
@@ -232,7 +233,7 @@ list_records(baseId, tableId, {
 
 Before any Airtable operation, verify:
 
-- [ ] Schema file exists and is read? (`.airtable/{appId}/schema.md`)
+- [ ] Schema file exists and is read? (`.airtable/{baseName}/schema.md`)
 - [ ] Using `filterByFormula` instead of views?
 - [ ] User input escaped with `escapeFormulaValue()`?
 - [ ] Pagination handled if expecting >100 records?

@@ -212,22 +212,23 @@ options.choices.map(c => c.name).join(', ')
 > **중요**: 스키마를 생성했으면 **반드시 파일에 저장**해야 한다. 화면에 출력만 하고 끝내면 안 된다!
 
 ```bash
-# 경로
-.airtable/{baseId}/schema.md
+# 경로 (한글 베이스명 사용)
+.airtable/{baseName}/schema.md
 
 # 예시
-.airtable/appABC123/schema.md
+.airtable/파트너스/schema.md
+.airtable/스터디관리/schema.md
 ```
 
 **디렉토리 생성**:
 ```bash
-mkdir -p .airtable/{baseId}
+mkdir -p .airtable/{baseName}
 ```
 
 **저장 방법**: Write 도구를 사용하여 생성된 마크다운을 파일에 저장한다.
 
 ```
-Write .airtable/{baseId}/schema.md
+Write .airtable/{baseName}/schema.md
 (생성된 스키마 마크다운 내용)
 ```
 
@@ -235,7 +236,7 @@ Write .airtable/{baseId}/schema.md
 
 ```
 스키마 생성 완료:
-- 파일: .airtable/{baseId}/schema.md
+- 파일: .airtable/{baseName}/schema.md
 - 테이블: {N}개
 - 필드: {M}개
 
