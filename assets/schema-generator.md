@@ -207,7 +207,9 @@ options.choices.map(c => c.name).join(', ')
 "-"
 ```
 
-### Step 6: 파일 저장
+### Step 6: 파일 저장 ⚠️ 필수
+
+> **중요**: 스키마를 생성했으면 **반드시 파일에 저장**해야 한다. 화면에 출력만 하고 끝내면 안 된다!
 
 ```bash
 # 경로
@@ -220,6 +222,13 @@ options.choices.map(c => c.name).join(', ')
 **디렉토리 생성**:
 ```bash
 mkdir -p .airtable/{baseId}
+```
+
+**저장 방법**: Write 도구를 사용하여 생성된 마크다운을 파일에 저장한다.
+
+```
+Write .airtable/{baseId}/schema.md
+(생성된 스키마 마크다운 내용)
 ```
 
 ## 생성 후 안내 메시지

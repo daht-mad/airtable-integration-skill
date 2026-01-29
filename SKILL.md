@@ -268,8 +268,11 @@ Step 1-3 완료 후 다음 순서로 자동 진행:
 1. `.env.local`에서 `AIRTABLE_BASE_ID` 읽기
 2. MCP 도구로 테이블 목록 조회 (`list_tables`)
 3. 각 테이블 스키마 조회 (`describe_table`)
-4. `.airtable/{appId}/schema.md` 생성
-5. 완료 안내
+4. **스키마를 마크다운으로 변환** (`assets/schema-generator.md` 참조)
+5. **⚠️ Write 도구로 `.airtable/{appId}/schema.md`에 저장** (필수!)
+6. 완료 안내
+
+> **주의**: 스키마를 생성했으면 **반드시 파일에 저장**해야 한다. 화면에 출력만 하고 끝내면 안 된다!
 
 ```
 스키마 생성 완료:
