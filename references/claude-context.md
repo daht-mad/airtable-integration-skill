@@ -102,6 +102,26 @@ Read .airtable/{baseName}/schema.md
 - 테이블/필드 구조 즉시 파악 가능
 - 비즈니스 컨텍스트 (USER-ADDED) 포함
 
+### 스키마 자동 갱신 규칙 (CRITICAL)
+
+**다음 MCP 도구 사용 후에는 반드시 스키마 파일을 갱신해야 한다:**
+
+| 스키마 변경 도구 | 수행할 작업 |
+|-----------------|-----------|
+| `create_table` | 새 테이블을 schema.md에 추가 |
+| `update_table` | 테이블 메타데이터 업데이트 |
+| `create_field` | 해당 테이블 섹션에 필드 추가 |
+| `update_field` | 해당 필드 정보 업데이트 |
+
+**자동 갱신 절차**:
+1. 스키마 변경 도구 호출 완료
+2. `describe_table(baseId, tableId, detailLevel: 'full')` 호출
+3. `.airtable/{baseName}/schema.md` 해당 섹션 업데이트
+4. `<!-- USER-ADDED -->` 영역은 보존
+5. "스키마 갱신 완료: {테이블명}" 알림
+
+> **CRITICAL**: 스키마 변경 도구 사용 후 다른 작업으로 넘어가기 전에 반드시 스키마 파일을 업데이트해야 한다. 이 규칙을 따르지 않으면 스키마 파일과 실제 Airtable 구조가 불일치하게 된다.
+
 ### 관련 파일
 
 - `lib/airtable.ts` - Airtable 클라이언트 및 TABLES 상수
